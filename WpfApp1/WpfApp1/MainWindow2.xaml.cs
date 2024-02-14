@@ -21,7 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow2 : Window
     {
-        private const int InitCulumnCount = 100;
+        private const int InitCulumnCount = 640;
 
         public ObservableCollection<Detail> Items { get; private set; } = new ObservableCollection<Detail>();
 
@@ -57,7 +57,7 @@ namespace WpfApp1
             var converter = new BooleanToVisibilityConverter();
             for (int columnIndex = 0; columnIndex < count; ++columnIndex)
             {
-                var binding = new Binding($"V[{columnIndex}].Value");
+                var binding = new Binding($"Values[{columnIndex}].Value");
                 binding.Converter = converter;
 
                 var factory = new FrameworkElementFactory(typeof(Rectangle));
