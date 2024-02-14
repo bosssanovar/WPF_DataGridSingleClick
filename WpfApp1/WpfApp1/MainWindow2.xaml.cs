@@ -55,9 +55,9 @@ namespace WpfApp1
             grid.Columns.Clear();
 
             var converter = new BooleanToVisibilityConverter();
-            for (int columnIndex = 1; columnIndex <= count; ++columnIndex)
+            for (int columnIndex = 0; columnIndex < count; ++columnIndex)
             {
-                var binding = new Binding($"V{columnIndex}.Value");
+                var binding = new Binding($"V[{columnIndex}].Value");
                 binding.Converter = converter;
 
                 var factory = new FrameworkElementFactory(typeof(Rectangle));

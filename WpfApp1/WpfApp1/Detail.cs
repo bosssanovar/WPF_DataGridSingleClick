@@ -9,10 +9,16 @@ namespace WpfApp1
 {
     public class Detail
     {
-        public ReactivePropertySlim<bool> V1 { get; } = new ReactivePropertySlim<bool>(false);
-        public ReactivePropertySlim<bool> V2 { get; } = new ReactivePropertySlim<bool>(false);
-        public ReactivePropertySlim<bool> V3 { get; } = new ReactivePropertySlim<bool>(true);
-        public ReactivePropertySlim<bool> V4 { get; } = new ReactivePropertySlim<bool>(false);
-        public ReactivePropertySlim<bool> V5 { get; } = new ReactivePropertySlim<bool>(false);
+        public List<ReactivePropertySlim<bool>> V { get; } = new List<ReactivePropertySlim<bool>>();
+
+        public Detail()
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                V.Add(new ReactivePropertySlim<bool>(false));
+            }
+
+            V[2].Value = true;
+        }
     }
 }
