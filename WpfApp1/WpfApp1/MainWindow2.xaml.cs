@@ -21,7 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow2 : Window
     {
-        private const int InitCulumnCount = 5;
+        private const int InitCulumnCount = 100;
 
         public ObservableCollection<Detail> Items { get; private set; } = new ObservableCollection<Detail>();
 
@@ -88,7 +88,7 @@ namespace WpfApp1
             var list = new List<Detail>();
             for (int i = 0; i < count; i++)
             {
-                list.Add(new Detail());
+                list.Add(new Detail(InitCulumnCount));
             }
 
             Items = new ObservableCollection<Detail>(list);

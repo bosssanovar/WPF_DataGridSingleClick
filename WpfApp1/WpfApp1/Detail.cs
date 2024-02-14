@@ -9,21 +9,19 @@ namespace WpfApp1
 {
     public class Detail
     {
-        public List<ReactivePropertySlim<bool>> V { get; } = new List<ReactivePropertySlim<bool>>();
+        public List<ReactivePropertySlim<bool>> Values { get; } = new List<ReactivePropertySlim<bool>>();
 
-        public Detail()
+        public Detail(int size)
         {
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < size; i++)
             {
-                V.Add(new ReactivePropertySlim<bool>(false));
+                Values.Add(new ReactivePropertySlim<bool>(false));
             }
-
-            V[2].Value = true;
         }
 
         public void Invert(int index)
         {
-            V[index].Value = !V[index].Value;
+            Values[index].Value = !Values[index].Value;
         }
     }
 }
