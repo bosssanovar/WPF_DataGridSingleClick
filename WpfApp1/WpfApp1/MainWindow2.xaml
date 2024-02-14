@@ -22,6 +22,11 @@
                   SelectionMode="Extended" SelectionUnit="Cell"
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
                   CanUserResizeRows="False" CanUserSortColumns="False">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <EventSetter Event="MouseLeftButtonUp" Handler="DataGridCell_MouseLeftButtonUp"/>
+                </Style>
+            </DataGrid.CellStyle>
         </DataGrid>
     </Grid>
 </Window>

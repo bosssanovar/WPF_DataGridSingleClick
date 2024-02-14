@@ -99,5 +99,19 @@ namespace WpfApp1
             };
             grid.SetBinding(DataGrid.ItemsSourceProperty, b);
         }
+
+        private void DataGridCell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (grid.SelectedCells.Count == 1)
+            {
+                var cell = sender as DataGridCell;
+                if (cell is null) return;
+
+                var columnIndex = cell.Column.DisplayIndex;
+                var rowIndex = grid.Items.IndexOf(grid.CurrentItem);
+
+                Items[rowIndex].Invert(columnIndex);
+            }
+        }
     }
 }

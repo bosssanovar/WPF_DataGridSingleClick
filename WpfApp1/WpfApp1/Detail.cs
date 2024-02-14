@@ -20,5 +20,10 @@ namespace WpfApp1
 
             V[2].Value = true;
         }
+
+        public void Invert(int index)
+        {
+            V[index].Value = !V[index].Value;
+        }
     }
 }
