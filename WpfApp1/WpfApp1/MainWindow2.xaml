@@ -18,30 +18,10 @@
         <DataGrid x:Name="grid" Grid.Row="1" Margin="5" AutoGenerateColumns="False" Visibility="Collapsed"
                   EnableColumnVirtualization="True" EnableRowVirtualization="True"
                   VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                  ItemsSource="{Binding Items}" RowHeight="18" HeadersVisibility="None">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Rectangle Width="10" Height="10" Fill="LightSkyBlue"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Rectangle Width="10" Height="10" Fill="LightSkyBlue"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Rectangle Width="10" Height="10" Fill="LightSkyBlue"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
+                  ItemsSource="{Binding Items}" RowHeight="18" HeadersVisibility="None"
+                  SelectionMode="Extended" SelectionUnit="Cell"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
+                  CanUserResizeRows="False" CanUserSortColumns="False">
         </DataGrid>
     </Grid>
 </Window>

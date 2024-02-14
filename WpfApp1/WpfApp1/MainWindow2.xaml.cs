@@ -21,14 +21,15 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow2 : Window
     {
+        private const int InitCulumnCount = 5;
 
-        public ObservableCollection<Object> Items { get; private set; } = new ObservableCollection<Object>();
+        public ObservableCollection<Detail> Items { get; private set; } = new ObservableCollection<Detail>();
 
         public MainWindow2()
         {
             InitializeComponent();
 
-            InitData(10);
+            InitData(InitCulumnCount);
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -36,6 +37,8 @@ namespace WpfApp1
             base.OnContentRendered(e);
 
             Cursor = Cursors.Wait;
+
+            InitColumns(InitCulumnCount);
 
             grid.Visibility = Visibility.Visible;
 
@@ -47,14 +50,54 @@ namespace WpfApp1
             App.Current.MainWindow = this;
         }
 
+        private void InitColumns(int count)
+        {
+            grid.Columns.Clear();
+
+            var converter = new BooleanToVisibilityConverter();
+            for (int columnIndex = 1; columnIndex <= count; ++columnIndex)
+            {
+                var binding = new Binding($"V{columnIndex}.Value");
+                binding.Converter = converter;
+
+                var factory = new FrameworkElementFactory(typeof(Rectangle));
+                factory.SetValue(Rectangle.HeightProperty, 10.0);
+                factory.SetValue(Rectangle.WidthProperty, 10.0);
+                factory.SetValue(Rectangle.FillProperty, Brushes.LightSkyBlue);
+                factory.SetBinding(Rectangle.VisibilityProperty, binding);
+
+                var dataTemplate = new DataTemplate();
+                dataTemplate.VisualTree = factory;
+
+                var column = new DataGridTemplateColumn();
+                column.CellTemplate = dataTemplate;
+
+                grid.Columns.Add(column);
+            }
+        }
+
         private void InitData(int count)
         {
-            Items.Clear();
+            // バインドを切断
+            Binding b = new Binding("Items")
+            {
+                Source = null
+            };
+            grid.SetBinding(DataGrid.ItemsSourceProperty, b);
 
+            var list = new List<Detail>();
             for (int i = 0; i < count; i++)
             {
-                Items.Add(new Object());
+                list.Add(new Detail());
             }
+
+            Items = new ObservableCollection<Detail>(list);
+
+            b = new Binding("Items")
+            {
+                Source = this
+            };
+            grid.SetBinding(DataGrid.ItemsSourceProperty, b);
         }
     }
 }
