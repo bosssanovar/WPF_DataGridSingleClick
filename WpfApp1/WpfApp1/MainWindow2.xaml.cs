@@ -142,7 +142,8 @@ namespace WpfApp1
 
         private void AllOn(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var rowIndex = DataGridHelper.GetSelectedRowIndex(grid);
+            Items[rowIndex].SetAll(true);
         }
 
         private void AreaOn(object sender, RoutedEventArgs e)

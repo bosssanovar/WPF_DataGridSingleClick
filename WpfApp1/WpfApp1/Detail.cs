@@ -13,7 +13,7 @@ namespace WpfApp1
 
         public Detail(int size)
         {
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 Values.Add(new ReactivePropertySlim<bool>(false));
             }
@@ -22,6 +22,11 @@ namespace WpfApp1
         public void Invert(int index)
         {
             Values[index].Value = !Values[index].Value;
+        }
+
+        public void SetAll(bool value)
+        {
+            Values.ForEach(x => x.Value = value);
         }
     }
 }
