@@ -109,10 +109,6 @@ namespace WpfApp1
 
                 Items[rowIndex].Invert(columnIndex);
             }
-            else
-            {
-                ShowContextMenu(true);
-            }
         }
 
         private void DataGridCell_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
