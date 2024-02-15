@@ -28,5 +28,10 @@ namespace WpfApp1
         {
             Values.ForEach(x => x.Value = value);
         }
+
+        public void SetOn(int index)
+        {
+            Values[index].Value = true;
+        }
     }
 }

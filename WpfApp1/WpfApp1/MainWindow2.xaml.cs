@@ -111,22 +111,39 @@ namespace WpfApp1
             }
             else
             {
-                ShowContextMenu();
+                ShowContextMenu(true);
             }
         }
 
         private void DataGridCell_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ShowContextMenu();
+            if (grid.SelectedCells.Count <= 1)
+            {
+                grid.Focus();
+                grid.SelectedCells.Clear();
+
+                DataGridCell? targetCell = DataGridHelper.GetCellAtMousePosition(sender, e);
+
+                if (targetCell is null) return;
+                grid.CurrentCell = new DataGridCellInfo(targetCell);
+                grid.SelectedCells.Add(grid.CurrentCell);
+
+                ShowContextMenu(false);
+            }
+            else
+            {
+                ShowContextMenu(true);
+            }
         }
 
-        private void ShowContextMenu()
+        private void ShowContextMenu(bool isSelectArea)
         {
             ContextMenu contextMenu = new ContextMenu();
 
             MenuItem menuItem = new MenuItem();
             menuItem.Header = "行全部設定";
             menuItem.Click += new RoutedEventHandler(AllOn);
+            menuItem.IsEnabled = !isSelectArea;
             contextMenu.Items.Add(menuItem);
 
             Separator separator = new Separator();
@@ -135,6 +152,7 @@ namespace WpfApp1
             menuItem = new MenuItem();
             menuItem.Header = "選択エリア設定";
             menuItem.Click += new RoutedEventHandler(AreaOn);
+            menuItem.IsEnabled = isSelectArea;
             contextMenu.Items.Add(menuItem);
 
             contextMenu.IsOpen = true;
@@ -148,9 +166,11 @@ namespace WpfApp1
 
         private void AreaOn(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var indexes = DataGridHelper.GetSelectedCellsIndex(grid);
+            foreach (var index in indexes)
+            {
+                Items[index.RowIndex].SetOn(index.ColumnIndex);
+            }
         }
-
-        
     }
 }
