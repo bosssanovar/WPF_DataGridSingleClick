@@ -104,14 +104,52 @@ namespace WpfApp1
         {
             if (grid.SelectedCells.Count == 1)
             {
-                var cell = sender as DataGridCell;
-                if (cell is null) return;
-
-                var columnIndex = cell.Column.DisplayIndex;
-                var rowIndex = grid.Items.IndexOf(grid.CurrentItem);
+                var columnIndex = DataGridHelper.GetSelectedColumnIndex(grid);
+                var rowIndex = DataGridHelper.GetSelectedRowIndex(grid);
 
                 Items[rowIndex].Invert(columnIndex);
             }
+            else
+            {
+                ShowContextMenu();
+            }
         }
+
+        private void DataGridCell_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowContextMenu();
+        }
+
+        private void ShowContextMenu()
+        {
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem menuItem = new MenuItem();
+            menuItem.Header = "行全部設定";
+            menuItem.Click += new RoutedEventHandler(AllOn);
+            contextMenu.Items.Add(menuItem);
+
+            Separator separator = new Separator();
+            contextMenu.Items.Add(separator);
+
+            menuItem = new MenuItem();
+            menuItem.Header = "選択エリア設定";
+            menuItem.Click += new RoutedEventHandler(AreaOn);
+            contextMenu.Items.Add(menuItem);
+
+            contextMenu.IsOpen = true;
+        }
+
+        private void AllOn(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AreaOn(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

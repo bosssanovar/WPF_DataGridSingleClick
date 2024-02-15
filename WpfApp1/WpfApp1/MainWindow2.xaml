@@ -24,7 +24,8 @@
                   CanUserResizeRows="False" CanUserSortColumns="False">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <EventSetter Event="MouseLeftButtonUp" Handler="DataGridCell_MouseLeftButtonUp"/>
+                    <EventSetter Event="PreviewMouseLeftButtonUp" Handler="DataGridCell_MouseLeftButtonUp"/>
+                    <EventSetter Event="PreviewMouseRightButtonDown" Handler="DataGridCell_PreviewMouseRightButtonDown"/>
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
